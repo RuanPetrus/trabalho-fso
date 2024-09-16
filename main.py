@@ -32,7 +32,7 @@ start_db()
 app = FastAPI()
 
 origins = [
-    "http://localhost:*",
+    "*",
 ]
 
 app.add_middleware (
