@@ -10,3 +10,9 @@ Run
 ```python
 fastapi dev main.py
 ```
+
+# How to run tests
+Run
+```python
+pytest
+```
