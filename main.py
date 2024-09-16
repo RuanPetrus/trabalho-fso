@@ -47,6 +47,7 @@ manager = ConnectionManager()
 
 @app.get("/{cpf}")
 async def get_root(cpf: str):
+    """Permite testar a implementação do websocket"""
     html = f"""
 <!DOCTYPE html>
 <html>
@@ -86,6 +87,7 @@ async def get_root(cpf: str):
 
 @app.get("/api/vagas/turno")
 async def api_vagas_turno():
+    """Retorna as vagas dos turnos"""
     matutino = Turno.from_string(await file_read(MATUTINO_FILE_PATH))
     matutino_vagas = 0
     for t in matutino.turmas:
@@ -104,6 +106,7 @@ async def api_vagas_turno():
 
 @app.get("/api/vagas/matutino")
 async def api_vagas_matutino():
+    """Retorna as vagas da turma do matutino"""
     turno = Turno.from_string(await file_read(MATUTINO_FILE_PATH))
     vagas = {}
     for idx, t in enumerate(turno.turmas):
@@ -113,6 +116,7 @@ async def api_vagas_matutino():
 
 @app.get("/api/vagas/vespertino")
 async def api_vagas_vespertino():
+    """Retorna as vagas da turma do vespertino"""
     turno = Turno.from_string(await file_read(VESPERTINO_FILE_PATH))
     vagas = {}
     for idx, t in enumerate(turno.turmas):
@@ -123,6 +127,7 @@ async def api_vagas_vespertino():
 
 @app.post("/api/cadastro/{cpf}", status_code=status.HTTP_201_CREATED)
 async def api_cadastro(cpf: str):
+    """Cadastra cpf"""
     student_path = path_from_cpf(cpf)
     if await file_exist(student_path):
         raise HTTPException(status_code=404, detail="Estudante ja cadastrado")
